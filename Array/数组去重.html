@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组去重</title>
+</head>
+<body>
+  <script>
+    var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+    function arr_unique(arr){
+      return [...new Set(arr)]
+    }
+
+    console.log(arr_unique(arr));
+    function arr_unique2(arr){
+      var res = [];
+      arr.forEach((val,index)=>{
+        if( res.indexOf(val) === -1 ){
+          res.push(val);
+        }
+      });
+      return res;
+    }
+    console.log(arr_unique2(arr));
+
+    function arr_unique3(arr){
+      return  arr.filter((val,index,item)=>{
+        return item.indexOf(val) === index;
+      });
+    }
+    console.log( arr_unique3(arr) );
+
+    function arr_unique4(arr){
+      var res = [];
+      arr.forEach((val)=>{
+        if( ! res.includes(val) ){
+          res.push(val);
+        }
+      });
+      return res;
+    }
+    console.log( arr_unique4(arr) );
+
+    function  arr_unique5(arr){
+      return arr.reduce( (prev, cur )=>{
+        if(  ! prev.includes(cur) ){
+          prev.push(cur);
+        }
+        return prev;  
+      } ,[]);
+    }
+    console.log( arr_unique5(arr) );
+
+    function unique(arr){      
+            for(var i=0; i<arr.length; i++){                
+                for(var j=i+1; j<arr.length; j++){
+                    if(arr[i]===arr[j]){         //第一个等同于第二个，splice方法删除第二个
+                        arr.splice(j,1);
+                        j--;
+                    }                    
+                }
+            }
+      return arr;
+    }
+    console.log( unique(arr) );
+
+    function arr_unique7(arr){
+      var hash = {};
+      return arr.filter( (val)=>{
+        console.log(hash);
+        return hash.hasOwnProperty( typeof  val + JSON.stringify(val) ) ? false : hash[typeof val + JSON.stringify(val)] = true ;
+      });
+    }
+    console.log( arr_unique7(arr) );
+  </script>
+</body>
+</html>
