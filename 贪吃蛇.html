@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>贪吃蛇</title>
+	<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<style>
+		*{margin:0 ;padding: 0;}		
+		#content ul{ list-style: none; display: flex; flex-wrap: wrap;box-sizing: border-box; margin: 50px;}
+		#content ul  li{
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+	</style>
+	<div id="content"></div>
+	<script>		
+
+		var  Snake = (function(id){
+			this.id = id;
+			this.head = [0,0];
+			this.status = [];
+			//容器属性
+			this.container = {
+				length_x: 10,
+				length_y:10, 
+				height: 30,
+				width: 30
+			};
+			//蛇的初始属性
+			this.snake_init = {
+				head_color:'red',
+				body_color:'blue',
+				food_color:'green',
+				init_length:3
+			};
+
+			initContainer();
+
+			//初始化棋盘
+			function initContainer(){
+				var newFragment = '';
+				for(var i = 0 ; i < this.container.length_x; i++){
+					for( var j = 0 ; j < this.container.length_y; j++){
+						newFragment += '<li></li>';
+					}
+				}
+				var that = this;
+				$('#'+this.id).append('<ul>'+newFragment+'</ul>');
+				$('#'+this.id).find('li').css({
+					'height': that.container.height + 'px',
+					'width': that.container.width + 'px',
+				});
+				$('#'+this.id).find('ul').css({
+					'height': that.container.height * that.container.length_y + 'px',
+					'width': that.container.width * that.container.length_x + 'px',
+				});
+
+			}
+
+			function moveLeft(){
+
+			}
+
+
+			//随机食物
+			function randomFood(){
+
+			}
+			return {
+				moveLeft: moveLeft,
+				moveTop: moveTop,
+				moveRight: moveRight,
+				moveDown: moveDown
+			}
+		})('content');
+
+		function  linkNode(data){
+			this.data = data;
+			this.head = null;			
+		}
+		function linkList(init){
+			this.head = new linkNode(init);			
+			return  this.head;
+		}
+		linkList.prototype = {
+			add:function(x,y){
+
+			}
+		};
+
+	</script>
+</body>
+</html>
